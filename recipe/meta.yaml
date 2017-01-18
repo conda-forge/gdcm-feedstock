@@ -1,4 +1,4 @@
-{% set version = "2.6.3" %}
+{% set version = "2.6.6" %}
 
 package:
   name: gdcm
@@ -7,14 +7,14 @@ package:
 source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
-  sha256: 60f5b213c8b31a43dd4c7ed99c34999917fe93b93cff69350fbefc7cb238a61e
+  sha256: 66651e376f8e69cb8244ded519dea44aa68e303e637619938ebf0c1fb31c2055
 
 build:
   number: 0
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
-    - vc14  # [win and py35]
+    - vc14  # [win and py>=35]
 
 requirements:
   build:
