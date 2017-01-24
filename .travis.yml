@@ -1,14 +1,17 @@
 # This file was generated automatically from conda-smithy. To update this configuration,
-# update the conda-forge.yaml and/or the recipe/meta.yaml.
+# update the conda-forge.yml and/or the recipe/meta.yaml.
 
-language: objective-c
+language: generic
+
+os: osx
+osx_image: xcode6.4
 
 env:
   matrix:
     
     - CONDA_PY=27
-    - CONDA_PY=34
     - CONDA_PY=35
+    - CONDA_PY=36
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
     - secure: "NGZCoT+yt2WsqjyViwbDe8ZjZ6NoeopYTQXVxdqZJd2deKxoO02MVdQfFoiW/t/n+dCUbQflewBftF6Sn60A7UMbjQsHCkdF43lHclcRat1PFCNhve/wdtmuGmDUcZHPPpxN/6uFlBn39UOTTWv1a1PTxx9mnGpWrxmnoG4Qe4THP2Glm6ZJ3TRRkUimcUiw3HRd+0hYF4FP/UUHPGf58pS01ITcBHIY+hm3B76LXS2RN3e2jWVsnMAgCeoaflbMB2bv2tjEiue5Sxt1KEqYhaU1yo0MgFt5kbjRXxcIs+X3KGpASJ+EUO/xwkqFO/dKARlW2Dav9UKITKaSueq/0x84teUyB8aC0iJDl3VW2BRgIWHAKb6wFk6qFv0nl3BO9MN/iWgnFTTXZONMcgOA6kVkE8/hU43VqISnZ5mjrtegOPtxdWkUdEC2p2T60KCDhH55N9Lmup4EVmT1VBviQ4s60CmXMdNS4MA9+KBBadyXEtwUsIgnTbkCAMJy5/IS+yHcVUGfq4j/LgYDNs6sVDhEkaZzD3OsZbGfNhnZ9HZH5seoZKhyOEgLd3r/C14TdUY1j26YufqsTSqyHRp2SV4fsOJGmeD4vxlR7hRWy4I8gQPl8H72eCHRQWu8X+2fNHTcSZj+bj9WZQi60PHSL4taoEJ1XQrz23Krr2ydCAA="
@@ -16,28 +19,26 @@ env:
 
 before_install:
     # Remove homebrew.
-    - brew remove --force $(brew list)
+    - brew remove --force --ignore-dependencies $(brew list)
     - brew cleanup -s
     - rm -rf $(brew --cache)
 
 install:
     - |
-      MINICONDA_URL="http://repo.continuum.io/miniconda"
+      MINICONDA_URL="https://repo.continuum.io/miniconda"
       MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
-      curl -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+      curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
       bash $MINICONDA_FILE -b
 
-      export PATH=/Users/travis/miniconda3/bin:$PATH
-
-      conda config --set show_channel_urls true
-      conda update --yes conda
-      conda install --yes conda-build=1.20.0 jinja2 anaconda-client
+      source /Users/travis/miniconda3/bin/activate root
+      conda config --remove channels defaults
+      conda config --add channels defaults
       conda config --add channels conda-forge
-      
+      conda config --set show_channel_urls true
+      conda install --yes --quiet conda-forge-build-setup
+      source run_conda_forge_build_setup
 
 script:
   - conda build ./recipe
 
-after_success:
-
-  - ./ci_support/upload_or_check_non_existence.py ./recipe conda-forge --channel=main
+  - upload_or_check_non_existence ./recipe conda-forge --channel=main
