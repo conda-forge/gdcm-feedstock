@@ -1,4 +1,4 @@
-{% set version = "2.8.4" %}
+{% set version = "2.8.5" %}
 
 package:
   name: gdcm
@@ -7,7 +7,7 @@ package:
 source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
-  sha256: c0859b306865c689cb570f5e2450417642cd95988960682cff0c675e0ff0732d
+  sha256: ac6e0f065ed1fa5568173c1ca9f34fce50e7ea15c95a32f6a6ef064141fd2269
 
 build:
   number: 0
