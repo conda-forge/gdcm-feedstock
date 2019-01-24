@@ -7,7 +7,7 @@ package:
 source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
-  sha256: a51bdce7dff1845fcdff1deaf14a187cf478adc47fce0c3c18be0bf47c844ac3
+  sha256: ea3d3c8ef0d413e794bb0df5b03b49d975e69619d8dcd89ed5873f1e45a86c87
 
 build:
   number: 1000
