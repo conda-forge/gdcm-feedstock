@@ -21,12 +21,13 @@ requirements:
   host:
     - python
     - swig
+    # TODO: We need to add more things
   run:
     - python
 
 test:
-  imports:
-    - gdcm
+  commands:
+    - python -vv "import gdcm"
 
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
