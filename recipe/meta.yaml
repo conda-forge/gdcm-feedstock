@@ -37,9 +37,12 @@ requirements:
     - zlib
     - openjpeg
     - expat
+    - json-c
     - libpython  # [win]
+    - jpeg
   run:
     - python
+    - json-c
 
 test:
   commands:
