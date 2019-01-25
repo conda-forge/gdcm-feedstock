@@ -24,11 +24,10 @@ requirements:
   build:
     - cmake
     - ninja
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler(native + 'c') }}
+    - {{ compiler(native + 'cxx') }}
     - swig
-    - {{ posix }}pkg-config
-    - m2w64-toolchain  # [win]
+    - {{ native }}pkg-config
   host:
     - python
     # TODO: We need to add more things
@@ -36,6 +35,7 @@ requirements:
     - zlib
     - openjpeg
     - expat
+    - libpython  # [win]
   run:
     - python
 
