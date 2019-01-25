@@ -27,9 +27,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - swig
-    - {{ posix }}pkg-config 
-    - m2w64-toolchain                    # [win]
-    host:
+    - {{ posix }}pkg-config
+    - m2w64-toolchain  # [win]
+  host:
     - python
     # TODO: We need to add more things
     - libuuid  # [unix]
