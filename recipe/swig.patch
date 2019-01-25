@@ -1,0 +1,16 @@
+diff --git a/Wrapping/Python/CMakeLists.txt b/Wrapping/Python/CMakeLists.txt
+index 1160d2498..17bb0b957 100644
+--- a/Wrapping/Python/CMakeLists.txt
++++ b/Wrapping/Python/CMakeLists.txt
+@@ -109,7 +109,11 @@ SWIG_LINK_LIBRARIES(${GDCM_PYTHON_IMPLEMENTATION_NAME} gdcmMEXD gdcmMSFF gdcmIOD
+ # this is required at least on Apple & Win32, but leave the option to advanced user to explicitly
+ # refuse linking to python libs (set GDCM_NO_PYTHON_LIBS_LINKING to ON):
+ if(NOT GDCM_NO_PYTHON_LIBS_LINKING)
+-  SWIG_LINK_LIBRARIES(${GDCM_PYTHON_IMPLEMENTATION_NAME} ${PYTHON_LIBRARY})
++  if (APPLE)
++    set_target_properties(${SWIG_MODULE_${GDCM_PYTHON_IMPLEMENTATION_NAME}_REAL_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
++  else()
++    SWIG_LINK_LIBRARIES(${GDCM_PYTHON_IMPLEMENTATION_NAME} ${PYTHON_LIBRARY})
++  endif()
+ endif()
+ set_property(TARGET ${SWIG_MODULE_${GDCM_PYTHON_IMPLEMENTATION_NAME}_REAL_NAME} PROPERTY NO_SONAME 1)

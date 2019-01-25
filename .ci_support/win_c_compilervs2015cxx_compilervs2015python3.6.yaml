@@ -6,9 +6,19 @@ channel_targets:
 - conda-forge main
 cxx_compiler:
 - vs2015
+expat:
+- '2.2'
+openjpeg:
+- '2.3'
 pin_run_as_build:
+  expat:
+    max_pin: x.x
+  openjpeg:
+    max_pin: x.x
   python:
     min_pin: x.x
+    max_pin: x.x
+  zlib:
     max_pin: x.x
 python:
 - '3.6'
@@ -16,3 +26,5 @@ zip_keys:
 - - python
   - c_compiler
   - cxx_compiler
+zlib:
+- '1.2'

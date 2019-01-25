@@ -8,9 +8,15 @@ source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
   sha256: ea3d3c8ef0d413e794bb0df5b03b49d975e69619d8dcd89ed5873f1e45a86c87
+  patches:
+    # patch for statically linked python
+    # https://stackoverflow.com/questions/50085173/swig-with-anaconda-environment-on-mac-os-throws-fatal-python-error-pythreadstat
+    - swig.patch  # [osx]
 
 build:
-  number: 1000
+  number: 0
+  ignore_run_exports:
+    - libuuid  # [unix]
 
 requirements:
   build:
@@ -18,16 +24,20 @@ requirements:
     - ninja
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - swig
   host:
     - python
-    - swig
     # TODO: We need to add more things
+    - libuuid  # [unix]
+    - zlib
+    - openjpeg
+    - expat
   run:
     - python
 
 test:
   commands:
-    - python -vv "import gdcm"
+    - python -v -c "import gdcm"
 
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
