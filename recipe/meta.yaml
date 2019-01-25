@@ -39,7 +39,7 @@ requirements:
     - expat
     - json-c
     - libpython  # [win]
-    - jpeg
+    - libjpeg-turbo
   run:
     - python
     - json-c
