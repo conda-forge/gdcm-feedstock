@@ -25,6 +25,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - swig
+    - pkgconfig  # [unix]
   host:
     - python
     # TODO: We need to add more things
