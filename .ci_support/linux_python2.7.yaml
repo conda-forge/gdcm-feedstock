@@ -10,11 +10,23 @@ docker_image:
 - condaforge/linux-anvil-comp7
 expat:
 - '2.2'
+jpeg:
+- '9'
+json_c:
+- '0.13'
+libuuid:
+- 2.32.1
 openjpeg:
 - '2.3'
 pin_run_as_build:
   expat:
     max_pin: x.x
+  jpeg:
+    max_pin: x
+  json-c:
+    max_pin: x.x
+  libuuid:
+    max_pin: x
   openjpeg:
     max_pin: x.x
   python:
