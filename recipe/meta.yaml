@@ -28,7 +28,7 @@ requirements:
     - {{ compiler('cxx') }}  # [unix]
     - pkg-config             # [unix]
     - swig
-    - m2w64-pkgconfig        # [win]
+    - m2w64-pkg-config        # [win]
     - m2w64-toolchain        # [win]
   host:
     - python
