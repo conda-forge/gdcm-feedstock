@@ -1,4 +1,6 @@
 {% set version = "2.8.8" %}
+{% set native = 'm2w64-' if win else '' %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
   name: gdcm
@@ -25,8 +27,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - swig
-    - pkg-config  # [unix]
-  host:
+    - {{ posix }}pkg-config 
+    - m2w64-toolchain                    # [win]
+    host:
     - python
     # TODO: We need to add more things
     - libuuid  # [unix]
