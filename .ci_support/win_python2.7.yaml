@@ -1,0 +1,30 @@
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+expat:
+- '2.2'
+json_c:
+- '0.13'
+libjpeg_turbo:
+- '2'
+openjpeg:
+- '2.3'
+pin_run_as_build:
+  expat:
+    max_pin: x.x
+  json-c:
+    max_pin: x.x
+  libjpeg_turbo:
+    max_pin: x
+  openjpeg:
+    max_pin: x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+python:
+- '2.7'
+zlib:
+- '1.2'

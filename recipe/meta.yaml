@@ -1,4 +1,6 @@
-{% set version = "2.8.4" %}
+{% set version = "2.8.8" %}
+{% set native = 'm2w64-' if win else '' %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
   name: gdcm
@@ -7,28 +9,44 @@ package:
 source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
-  sha256: c0859b306865c689cb570f5e2450417642cd95988960682cff0c675e0ff0732d
+  sha256: ea3d3c8ef0d413e794bb0df5b03b49d975e69619d8dcd89ed5873f1e45a86c87
+  patches:
+    # patch for statically linked python
+    # https://stackoverflow.com/questions/50085173/swig-with-anaconda-environment-on-mac-os-throws-fatal-python-error-pythreadstat
+    - swig.patch  # [osx]
 
 build:
   number: 0
-  features:
-    - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py>=35]
+  ignore_run_exports:
+    - libuuid  # [unix]
 
 requirements:
   build:
-    - toolchain
     - cmake
     - ninja
-    - python
+    - {{ compiler('c') }}    # [unix]
+    - {{ compiler('cxx') }}  # [unix]
+    - pkg-config             # [unix]
     - swig
+    - m2w64-pkg-config        # [win]
+    - m2w64-toolchain        # [win]
+  host:
+    - python
+    # TODO: We need to add more things
+    - libuuid  # [unix]
+    - zlib
+    - openjpeg
+    - expat
+    - json-c
+    - libpython  # [win]
+    - libjpeg-turbo
   run:
     - python
+    - json-c
 
 test:
-  imports:
-    - gdcm
+  commands:
+    - python -v -c "import gdcm"
 
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
@@ -38,4 +56,4 @@ about:
 extra:
   recipe-maintainers:
     - ivoflipse
-    - Korijn
+    - mariusvniekerk
