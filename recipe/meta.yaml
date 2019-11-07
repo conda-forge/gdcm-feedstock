@@ -50,7 +50,10 @@ test:
 
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
-  license: BSD-2-Clause
+  # Newer versions are actually BSD-2-Clause but this one is 3!
+  # https://github.com/malaterre/GDCM/blob/d4bb168fed8f4305e7181a016d76831113fbc448/Copyright.txt
+  license: BSD-3-Clause
+  license_file: Copyright.txt
   summary: Grassroots DICOM, cross-platform DICOM implementation.
 
 extra:
