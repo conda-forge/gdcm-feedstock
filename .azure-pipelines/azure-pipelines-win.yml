@@ -10,18 +10,18 @@ jobs:
   strategy:
     maxParallel: 4
     matrix:
-      win_python2.7:
-        CONFIG: win_python2.7
+      win_python2.7.____cpython:
+        CONFIG: win_python2.7.____cpython
         CONDA_BLD_PATH: D:\\bld\\
-        UPLOAD_PACKAGES: False
-      win_python3.6:
-        CONFIG: win_python3.6
+        UPLOAD_PACKAGES: True
+      win_python3.6.____cpython:
+        CONFIG: win_python3.6.____cpython
         CONDA_BLD_PATH: D:\\bld\\
-        UPLOAD_PACKAGES: False
-      win_python3.7:
-        CONFIG: win_python3.7
+        UPLOAD_PACKAGES: True
+      win_python3.7.____cpython:
+        CONFIG: win_python3.7.____cpython
         CONDA_BLD_PATH: D:\\bld\\
-        UPLOAD_PACKAGES: False
+        UPLOAD_PACKAGES: True
   steps:
     # TODO: Fast finish on azure pipelines?
     - script: |
@@ -66,7 +66,7 @@ jobs:
       inputs:
         packageSpecs: 'python=3.6 conda-build conda conda-forge::conda-forge-ci-setup=2' # Optional
         installOptions: "-c conda-forge"
-        updateConda: false
+        updateConda: true
       displayName: Install conda-build and activate environment
 
     - script: set PYTHONUNBUFFERED=1
@@ -76,8 +76,8 @@ jobs:
 
     # Configure the VM.
     - script: |
+        set "CI=azure"
         run_conda_forge_build_setup
-
       displayName: conda-forge build setup
     
 
@@ -103,7 +103,9 @@ jobs:
       condition: not(contains(variables['CONFIG'], 'vs2008'))
 
     - script: |
+        set "GIT_BRANCH=%BUILD_SOURCEBRANCHNAME%"
         upload_package .\ .\recipe .ci_support\%CONFIG%.yaml
+      displayName: Upload package
       env:
         BINSTAR_TOKEN: $(BINSTAR_TOKEN)
-      condition: not(eq(variables['UPLOAD_PACKAGES'], 'False'))
+      condition: and(succeeded(), not(eq(variables['UPLOAD_PACKAGES'], 'False')))
