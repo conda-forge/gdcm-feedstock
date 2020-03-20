@@ -16,7 +16,7 @@ source:
     - swig.patch  # [osx]
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - libuuid  # [unix]
 
@@ -51,6 +51,7 @@ test:
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
   license: BSD-2-Clause
+  license_file: Copyright.txt
   summary: Grassroots DICOM, cross-platform DICOM implementation.
 
 extra:
