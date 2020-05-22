@@ -17,6 +17,7 @@ source:
 
 build:
   number: 0
+  skip: True  # [py27]
   ignore_run_exports:
     - libuuid  # [unix]
 
@@ -31,7 +32,7 @@ requirements:
     - m2w64-pkg-config        # [win]
     - m2w64-toolchain         # [win]
   host:
-    - python >=3.6
+    - python
     # TODO: We need to add more things
     - libuuid  # [unix]
     - zlib
@@ -41,7 +42,7 @@ requirements:
     - libpython  # [win]
     - libjpeg-turbo
   run:
-    - python >=3.6
+    - python
     - json-c
 
 test:
