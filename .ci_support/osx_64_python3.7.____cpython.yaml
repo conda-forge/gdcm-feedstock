@@ -1,0 +1,51 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
+c_compiler:
+- clang
+c_compiler_version:
+- '10'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- clangxx
+cxx_compiler_version:
+- '10'
+expat:
+- '2.2'
+json_c:
+- '0.13'
+libjpeg_turbo:
+- '2'
+libuuid:
+- 2.32.1
+macos_machine:
+- x86_64-apple-darwin13.4.0
+openjpeg:
+- '2.3'
+pin_run_as_build:
+  expat:
+    max_pin: x.x
+  json-c:
+    max_pin: x.x
+  libjpeg_turbo:
+    max_pin: x
+  libuuid:
+    max_pin: x
+  openjpeg:
+    max_pin: x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+python:
+- 3.7.* *_cpython
+target_platform:
+- osx-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
+zlib:
+- '1.2'
