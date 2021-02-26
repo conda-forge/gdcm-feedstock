@@ -17,7 +17,7 @@ docker_image:
 expat:
 - '2.2'
 json_c:
-- '0.13'
+- '0.15'
 libjpeg_turbo:
 - '2'
 libuuid:
@@ -47,5 +47,7 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - cdt_name
+  - docker_image
 zlib:
 - '1.2'

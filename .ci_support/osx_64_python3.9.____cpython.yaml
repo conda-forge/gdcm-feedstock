@@ -15,7 +15,7 @@ cxx_compiler_version:
 expat:
 - '2.2'
 json_c:
-- '0.13'
+- '0.15'
 libjpeg_turbo:
 - '2'
 libuuid:
