@@ -3,7 +3,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 expat:
-- '2.2'
+- '2.3'
 json_c:
 - '0.15'
 libjpeg_turbo:
