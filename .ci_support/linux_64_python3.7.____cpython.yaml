@@ -15,7 +15,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 expat:
-- '2.2'
+- '2'
 json_c:
 - '0.15'
 libjpeg_turbo:
@@ -25,8 +25,6 @@ libuuid:
 openjpeg:
 - '2.4'
 pin_run_as_build:
-  expat:
-    max_pin: x.x
   json-c:
     max_pin: x.x
   libjpeg_turbo:

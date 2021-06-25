@@ -12,6 +12,9 @@ environment:
     - CONFIG: win_64_python3.6.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
+    - CONFIG: win_64_python3.7.____73_pypy
+      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
+
     - CONFIG: win_64_python3.7.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
