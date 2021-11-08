@@ -5,7 +5,7 @@ c_compiler:
 c_compiler_version:
 - '11'
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -13,20 +13,18 @@ cxx_compiler:
 cxx_compiler_version:
 - '11'
 expat:
-- '2.2'
+- '2'
 json_c:
 - '0.15'
 libjpeg_turbo:
 - '2'
 libuuid:
-- 2.32.1
+- '2'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openjpeg:
 - '2.4'
 pin_run_as_build:
-  expat:
-    max_pin: x.x
   json-c:
     max_pin: x.x
   libjpeg_turbo:
