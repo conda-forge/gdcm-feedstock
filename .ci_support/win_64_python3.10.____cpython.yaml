@@ -9,7 +9,7 @@ json_c:
 libjpeg_turbo:
 - '2'
 openjpeg:
-- '2.4'
+- '2.5'
 pin_run_as_build:
   json-c:
     max_pin: x.x
