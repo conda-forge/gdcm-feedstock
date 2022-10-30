@@ -9,21 +9,13 @@ json_c:
 libjpeg_turbo:
 - '2'
 openjpeg:
-- '2.5'
+- '2'
 pin_run_as_build:
-  json-c:
-    max_pin: x.x
-  libjpeg_turbo:
-    max_pin: x
-  openjpeg:
-    max_pin: x.x
   python:
     min_pin: x.x
     max_pin: x.x
-  zlib:
-    max_pin: x.x
 python:
-- 3.7.* *_cpython
+- 3.11.* *_cpython
 target_platform:
 - win-64
 zlib:
