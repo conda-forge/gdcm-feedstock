@@ -15,6 +15,9 @@ environment:
     - CONFIG: win_64_python3.11.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
+    - CONFIG: win_64_python3.12.____cpython
+      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
+
     - CONFIG: win_64_python3.8.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
@@ -48,7 +51,7 @@ install:
     # Tell conda we want an updated version of conda-build and conda-forge-ci-setup=3
     - cmd: conda.exe install -n root -c conda-forge --quiet --yes conda-build pip conda-forge-ci-setup=3
     - cmd: setup_conda_rc .\ .\recipe .\.ci_support\%CONFIG%.yaml
-    - cmd: run_conda_forge_build_setup
+    - cmd: CALL run_conda_forge_build_setup
 
 # Skip .NET project specific build phase.
 build: off
