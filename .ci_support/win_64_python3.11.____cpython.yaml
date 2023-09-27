@@ -7,7 +7,7 @@ expat:
 json_c:
 - '0.17'
 libjpeg_turbo:
-- 2.1.5
+- '3'
 openjpeg:
 - '2'
 pin_run_as_build:
