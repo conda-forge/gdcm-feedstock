@@ -16,7 +16,7 @@ source:
     - swig.patch  # [osx]
 
 build:
-  number: 8
+  number: 9
   ignore_run_exports:
     - libuuid  # [unix]
 
