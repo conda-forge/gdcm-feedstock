@@ -17,7 +17,7 @@ expat:
 json_c:
 - '0.17'
 libjpeg_turbo:
-- 2.1.5
+- '3'
 libuuid:
 - '2'
 macos_machine:
