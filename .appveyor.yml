@@ -18,9 +18,6 @@ environment:
     - CONFIG: win_64_python3.12.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
-    - CONFIG: win_64_python3.8.____cpython
-      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
-
     - CONFIG: win_64_python3.9.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
@@ -48,8 +45,8 @@ install:
     - cmd: set PYTHONUNBUFFERED=1
 
     # Configure the VM.
-    # Tell conda we want an updated version of conda-build and conda-forge-ci-setup=3
-    - cmd: conda.exe install -n root -c conda-forge --quiet --yes conda-build pip conda-forge-ci-setup=3
+    # Tell conda we want an updated version of conda-build and conda-forge-ci-setup=4 "conda-build>=24.1"
+    - cmd: conda.exe install -n root -c conda-forge --quiet --yes conda-build pip conda-forge-ci-setup=4 "conda-build>=24.1"
     - cmd: setup_conda_rc .\ .\recipe .\.ci_support\%CONFIG%.yaml
     - cmd: CALL run_conda_forge_build_setup
 
@@ -57,7 +54,10 @@ install:
 build: off
 
 test_script:
-    - cmd: conda.exe build recipe -m .ci_support\%CONFIG%.yaml
+    - set "flow_run_id=appveyor_%APPVEYOR_BUILD_ID%"
+    - set "remote_url=https://github.com/%APPVEYOR_REPO_NAME%"
+    - set "sha=%APPVEYOR_REPO_COMMIT%"
+    - cmd: conda.exe build recipe -m .ci_support\%CONFIG%.yaml --extra-meta flow_run_id=%flow_run_id% remote_url=%remote_url% sha=%sha%
     - set "FEEDSTOCK_NAME=%APPVEYOR_REPO_NAME:*/=%"
     - cmd: validate_recipe_outputs "%FEEDSTOCK_NAME%"
 deploy_script:
