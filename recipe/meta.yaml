@@ -16,7 +16,7 @@ source:
     - swig.patch  # [osx]
 
 build:
-  number: 10
+  number: 11
   ignore_run_exports:
     - libuuid  # [unix]
 
@@ -25,6 +25,7 @@ requirements:
     - cmake
     - ninja
     - {{ compiler('c') }}    # [unix]
+    - {{ stdlib("c") }}      # [unix]
     - {{ compiler('cxx') }}  # [unix]
     - pkg-config             # [unix]
     - swig
