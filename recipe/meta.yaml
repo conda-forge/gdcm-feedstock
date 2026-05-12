@@ -1,9 +1,7 @@
 {% set version = "3.2.4" %}
-{% set native = 'm2w64-' if win else '' %}
-{% set posix = 'm2-' if win else '' %}
 
 package:
-  name: gdcm
+  name: gdcm-split
   version: {{ version }}
 
 source:
@@ -11,29 +9,22 @@ source:
   fn: GDCM-{{ version }}.tar.gz
   sha256: 7f4a039613b428ab2f8235867d1f450b5827d476f9ddd422783eb05d7366b89c
   patches:
-    # patch for statically linked python
-    # https://stackoverflow.com/questions/50085173/swig-with-anaconda-environment-on-mac-os-throws-fatal-python-error-pythreadstat
-    - swig.patch  
+    - swig.patch
 
 build:
   number: 0
-  ignore_run_exports:
-    - libuuid  # [unix]
 
 requirements:
   build:
-    - cmake
+    - cmake <4
     - ninja
-    - {{ compiler('c') }}    # [unix]
-    - {{ stdlib("c") }}      # [unix]
-    - {{ compiler('cxx') }}  # [unix]
-    - pkg-config             # [unix]
+    - {{ compiler('c') }}
+    - {{ stdlib("c") }}
+    - {{ compiler('cxx') }}
+    - pkg-config  # [unix]
     - swig
-    - m2w64-pkg-config        # [win]
-    - m2w64-toolchain        # [win]
   host:
     - python
-    # TODO: We need to add more things
     - libuuid  # [unix]
     - zlib
     - openjpeg
@@ -41,13 +32,64 @@ requirements:
     - json-c
     - libpython  # [win]
     - libjpeg-turbo
-  run:
-    - python
-    - json-c
 
-test:
-  commands:
-    - python -v -c "import gdcm"
+outputs:
+  - name: libgdcm
+    script: libgdcm_install.sh   # [not win]
+    script: libgdcm_install.bat  # [win]
+    requirements:
+      build:
+        - cmake <4
+      host:
+        - libuuid  # [unix]
+        - zlib
+        - openjpeg
+        - expat
+        - json-c
+        - libjpeg-turbo
+      run:
+        - json-c
+    test:
+      commands:
+        - test -f $PREFIX/lib/libgdcmCommon.so.3.2       # [linux]
+        - test -f $PREFIX/lib/libgdcmCommon.3.2.dylib  # [osx]
+        - test -f $PREFIX/share/gdcm-3.2/XML/Part3.xml               # [unix]
+        - if not exist %LIBRARY_BIN%\\gdcmCommon.dll exit 1          # [win]
+
+  - name: libgdcm-devel
+    script: libgdcm-devel_install.sh   # [not win]
+    script: libgdcm-devel_install.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('libgdcm', max_pin='x.x') }}
+    requirements:
+      build:
+        - cmake <4
+      host:
+        - {{ pin_subpackage('libgdcm', exact=True) }}
+      run:
+        - {{ pin_subpackage('libgdcm', exact=True) }}
+    test:
+      commands:
+        - test -d $PREFIX/include/gdcm-3.2                            # [unix]
+        - test -f $PREFIX/lib/gdcm-3.2/GDCMConfig.cmake              # [unix]
+        - if not exist %LIBRARY_INC%\\gdcm-3.2 exit 1                # [win]
+
+  - name: gdcm
+    script: gdcm_install.sh   # [not win]
+    script: gdcm_install.bat  # [win]
+    requirements:
+      build:
+        - cmake <4
+      host:
+        - python
+        - {{ pin_subpackage('libgdcm', exact=True) }}
+      run:
+        - python
+        - {{ pin_subpackage('libgdcm', exact=True) }}
+    test:
+      commands:
+        - python -c "import gdcm"
 
 about:
   home: https://sourceforge.net/p/gdcm/gdcm/
