@@ -1,6 +1,4 @@
 {% set version = "3.2.8" %}
-{% set native = 'm2w64-' if win else '' %}
-{% set posix = 'm2-' if win else '' %}
 
 package:
   name: gdcm
