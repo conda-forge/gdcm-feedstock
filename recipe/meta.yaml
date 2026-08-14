@@ -37,7 +37,7 @@ requirements:
     - openjpeg
     - expat
     - json-c
-    - libpython  # [win]
+    - distutils-activate-mingw  # [win]
     - libjpeg-turbo
   run:
     - python
