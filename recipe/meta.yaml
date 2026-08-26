@@ -1,6 +1,4 @@
-{% set version = "3.2.4" %}
-{% set native = 'm2w64-' if win else '' %}
-{% set posix = 'm2-' if win else '' %}
+{% set version = "3.2.8" %}
 
 package:
   name: gdcm
@@ -9,14 +7,14 @@ package:
 source:
   url: https://github.com/malaterre/GDCM/archive/v{{ version }}.tar.gz
   fn: GDCM-{{ version }}.tar.gz
-  sha256: 7f4a039613b428ab2f8235867d1f450b5827d476f9ddd422783eb05d7366b89c
+  sha256: bf9f75af2607adb8a4ee0e30dd3d61f61e8dc4e5229c748bdcc72c1c546fd232
   patches:
     # patch for statically linked python
     # https://stackoverflow.com/questions/50085173/swig-with-anaconda-environment-on-mac-os-throws-fatal-python-error-pythreadstat
-    - swig.patch  
+    - swig.patch
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - libuuid  # [unix]
 
@@ -39,7 +37,7 @@ requirements:
     - openjpeg
     - expat
     - json-c
-    - libpython  # [win]
+    - distutils-activate-mingw  # [win]
     - libjpeg-turbo
   run:
     - python
