@@ -9,9 +9,6 @@ environment:
   
 
   matrix:
-    - CONFIG: win_64_python3.10.____cpython
-      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
-
     - CONFIG: win_64_python3.11.____cpython
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
@@ -21,6 +18,12 @@ environment:
     - CONFIG: win_64_python3.13.____cp313
       CONDA_INSTALL_LOCN: C:\Miniconda36-x64
 
+    - CONFIG: win_64_python3.14.____cp314
+      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
+
+    - CONFIG: win_64_python3.15.____cp315
+      CONDA_INSTALL_LOCN: C:\Miniconda36-x64
+
 
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable.
@@ -28,6 +31,7 @@ platform:
     - x64
 
 install:
+    - cmd: echo "WARNING. Drone CI integration is deprecated and will be removed in 2026.10. See conda-smithy#2627" 1>&2
     - cmd: set "CI=appveyor"
     # If there is a newer build queued for the same PR, cancel this one.
     - cmd: |
@@ -45,8 +49,8 @@ install:
     - cmd: set PYTHONUNBUFFERED=1
 
     # Configure the VM.
-    # Tell conda we want an updated version of conda-build and conda-forge-ci-setup=4 "conda-build>=24.1"
-    - cmd: conda.exe install -n root -c conda-forge --quiet --yes conda-build pip conda-forge-ci-setup=4 "conda-build>=24.1"
+    # Tell conda we want an updated version of conda-build and conda-forge-ci-setup=4 "conda-build>=26.3"
+    - cmd: conda.exe install -n root -c conda-forge --quiet --yes conda-build pip conda-forge-ci-setup=4 "conda-build>=26.3"
     - cmd: setup_conda_rc .\ .\recipe .\.ci_support\%CONFIG%.yaml
     - cmd: CALL run_conda_forge_build_setup
 
